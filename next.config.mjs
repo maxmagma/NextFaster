@@ -19,7 +19,7 @@ const nextConfig = {
       '@radix-ui/react-slider',
       '@radix-ui/react-slot',
       '@radix-ui/react-tabs',
-      'lucide-react',
+      '@heroicons/react',
       'date-fns',
       'recharts',
       'framer-motion',
