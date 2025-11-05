@@ -14,6 +14,7 @@ import { GeistMono } from 'geist/font/mono';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { generateOrganizationSchema, SchemaScript } from '@/lib/seo/schema';
 import { siteConfig } from '@/lib/seo/metadata';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: {
@@ -79,6 +80,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Access headers to make this dynamic (required for new Date())
+  await headers();
+
   const orgSchema = generateOrganizationSchema();
 
   return (
