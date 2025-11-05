@@ -7,6 +7,14 @@ import * as oldSchema from '@/db/schema';
 const schema = { ...oldSchema, ...newSchema };
 
 const connectionString = process.env.SUPABASE_DB_URL!;
-const client = postgres(connectionString, { prepare: false });
+
+// Configure postgres with better error handling
+const client = postgres(connectionString, {
+  prepare: false,
+  max: 1, // Limit connections during development
+  idle_timeout: 20,
+  connect_timeout: 10,
+  onnotice: () => {}, // Suppress notices
+});
 
 export const db = drizzle(client, { schema });

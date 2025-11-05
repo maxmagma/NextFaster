@@ -80,8 +80,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Access headers to make this dynamic (required for new Date())
-  await headers();
+  // Call headers() to opt into dynamic rendering (required for new Date())
+  // Don't await - just calling it is enough to make the route dynamic
+  headers();
 
   const orgSchema = generateOrganizationSchema();
 

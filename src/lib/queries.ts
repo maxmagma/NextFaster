@@ -58,13 +58,20 @@ export const getProductsForSubcategory = unstable_cache(
 );
 
 export const getCollections = unstable_cache(
-  () =>
-    db.query.collections.findMany({
-      with: {
-        categories: true,
-      },
-      orderBy: (collections, { asc }) => asc(collections.name),
-    }),
+  async () => {
+    try {
+      return await db.query.collections.findMany({
+        with: {
+          categories: true,
+        },
+        orderBy: (collections, { asc }) => asc(collections.name),
+      });
+    } catch (error) {
+      console.error('Database connection error in getCollections:', error);
+      // Return empty array if database is not available
+      return [];
+    }
+  },
   ["collections"],
   {
     revalidate: 60 * 60 * 2, // two hours,
@@ -127,7 +134,15 @@ export const getCollectionDetails = unstable_cache(
 );
 
 export const getProductCount = unstable_cache(
-  () => db.select({ count: count() }).from(products),
+  async () => {
+    try {
+      return await db.select({ count: count() }).from(products);
+    } catch (error) {
+      console.error('Database connection error in getProductCount:', error);
+      // Return 0 count if database is not available
+      return [{ count: 0 }];
+    }
+  },
   ["total-product-count"],
   {
     revalidate: 60 * 60 * 2, // two hours,
