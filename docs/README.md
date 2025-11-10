@@ -2,7 +2,7 @@
 
 ## 📚 Documentation Overview
 
-Welcome to the WedStay Marketplace documentation. This marketplace is built on the [NextFaster](https://github.com/ethanniser/NextFaster) high-performance e-commerce template, adapted for the luxury wedding venue and product rental industry.
+Welcome to the WedStay Marketplace documentation. This is a **lead generation and affiliate marketplace** built on the [NextFaster](https://github.com/ethanniser/NextFaster) high-performance template, adapted for the luxury wedding industry.
 
 ### 🚀 Quick Links
 
@@ -24,8 +24,7 @@ Welcome to the WedStay Marketplace documentation. This marketplace is built on t
 ### 📚 Guides
 - [Setup Guide](./guides/setup.md) - Development environment setup
 - [Deployment Guide](./guides/deployment.md) - Production deployment checklist
-- [Vendor Onboarding](./guides/vendor-onboarding.md) - Vendor portal documentation
-- [Admin Guide](./guides/admin-guide.md) - Admin dashboard operations
+- [Admin Guide](./guides/admin-guide.md) - Admin dashboard operations for WedStay team
 
 ### 🔌 API Documentation
 - [Server Actions](./api/server-actions.md) - All server actions reference
@@ -33,10 +32,10 @@ Welcome to the WedStay Marketplace documentation. This marketplace is built on t
 - [Webhooks](./api/webhooks.md) - Stripe and Supabase webhooks
 
 ### ✨ Features
-- [Marketplace](./features/marketplace.md) - E-commerce functionality
+- [Marketplace](./features/marketplace.md) - Lead generation and affiliate marketplace
 - [AI Visualizer](./features/ai-visualizer.md) - Venue visualization with AI
-- [Vendor Dashboard](./features/vendor-dashboard.md) - Vendor management system
-- [Admin Panel](./features/admin-panel.md) - Administrative features
+- [Admin Dashboard](./features/admin-dashboard.md) - Product management for WedStay team
+- [Inquiry System](./features/inquiry-system.md) - Lead capture and vendor routing
 
 ---
 
@@ -50,11 +49,11 @@ Welcome to the WedStay Marketplace documentation. This marketplace is built on t
 - **Streaming SSR** for instant page loads
 
 ### Wedding-Specific Features
-- 🏛 **Venue & Product Marketplace** - Curated wedding products and rentals
+- 🏛 **Admin-Curated Marketplace** - WedStay team manages all wedding products
 - 🎨 **AI Venue Visualizer** - Transform venue photos with product overlays
-- 👥 **Multi-Vendor System** - Complete vendor management
-- 💼 **Inquiry Management** - Quote requests and bookings
-- 💳 **Stripe Integration** - Secure payment processing
+- 🔗 **Affiliate & Direct Links** - Products redirect to external vendor sites
+- 💼 **Lead Generation** - Inquiry forms for rental products routed to vendors
+- 📊 **Commission Tracking** - Track revenue from affiliates and leads
 
 ### Technical Stack
 - **Framework**: Next.js 15 with App Router

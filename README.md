@@ -2,13 +2,24 @@
 
 A luxury wedding venue and product marketplace built on the [NextFaster](https://github.com/ethanniser/NextFaster) high-performance e-commerce template.
 
+## Business Model
+
+WedStay is a **lead generation and affiliate marketplace** for wedding products and rentals:
+
+- **WedStay admins curate ALL products** - No vendor self-service portal
+- **Two revenue streams:**
+  - **Affiliate/Direct Purchase**: Products link to external vendors via affiliate links
+  - **Rental Inquiries**: Inquiry forms submitted to vendors, WedStay earns commission on leads
+- **No payment processing or fulfillment** - Users are redirected to vendors or submit inquiry forms
+- **Vision Board/Cart functionality** - Users collect products, then checkout via external links or inquiries
+
 ## Features
 
-- 🏛 **Venue & Product Marketplace** - Curated wedding products and rentals
+- 🏛 **Curated Product Marketplace** - WedStay team manages all wedding products and rentals
 - 🎨 **AI Venue Visualizer** - Transform venue photos with product overlays
-- 👥 **Multi-Vendor System** - Complete vendor management
-- 💼 **Inquiry Management** - Quote requests and bookings
-- 💳 **Stripe Integration** - Secure payment processing
+- 🔗 **Affiliate & Direct Links** - Products link to vendor sites or affiliate programs
+- 💼 **Lead Generation** - Inquiry forms for rentals sent directly to vendors
+- 📊 **Admin Dashboard** - Complete product, inquiry, and analytics management
 - ⚡ **Blazing Fast** - Built on NextFaster's performance architecture
 
 ## Tech Stack

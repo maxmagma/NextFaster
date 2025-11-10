@@ -6,53 +6,58 @@ This guide provides context and custom slash commands for Claude AI when working
 
 ## Project Context
 
-WedStay Marketplace is a high-performance wedding venue and product marketplace built on the NextFaster template. It adapts NextFaster's proven performance architecture for the luxury wedding industry.
+WedStay Marketplace is a high-performance **lead generation and affiliate marketplace** for wedding products and rentals, built on the NextFaster template.
+
+### Business Model
+- **WedStay admins curate ALL products** - No vendor self-service portal
+- **Affiliate/Direct Purchase** - Products link to external vendors via affiliate links or direct URLs
+- **Rental Inquiries** - Lead generation for rental products, inquiry forms sent to vendors
+- **No payment processing or fulfillment** - Users redirected to vendor sites or submit inquiry forms
+- **Commission-based revenue** - Earn on affiliate sales and qualified leads
+- **Vendors are reference data only** - Vendor info stored but vendors don't log in
 
 ### Key Technologies
 - **Next.js 16** with Partial Prerendering (PPR) and Turbopack
 - **Supabase** (PostgreSQL, Auth, Storage) - replacing Vercel Postgres
 - **Drizzle ORM** for type-safe database queries
-- **Stripe** for payments
 - **Replicate API** for AI venue visualization
 - **Upstash Redis** for caching (from NextFaster)
 - **Tailwind CSS** + **shadcn/ui** for styling
 
 ### Core Features
-1. **Multi-vendor Marketplace** - Wedding product rentals and services
+1. **Admin-Curated Marketplace** - WedStay team manages all wedding products
 2. **AI Venue Visualizer** - Transform venue photos with product overlays
-3. **Vendor Portal** - Complete vendor management dashboard
-4. **Admin Panel** - Content moderation and analytics
-5. **Inquiry System** - Quote requests and bookings
+3. **Admin Dashboard** - Product management, inquiry handling, and analytics
+4. **Inquiry System** - Lead capture and vendor communication
+5. **Affiliate Integration** - Track and manage affiliate/direct product links
+6. **Vision Board/Cart** - Users collect products then checkout externally
 
 ---
 
 ## Project Structure
 
 ```
-wedding-marketplace/
+wedstay-marketplace/
 ├── docs/                    # Comprehensive documentation
 │   ├── architecture/        # System design
 │   ├── guides/             # Setup and deployment
-│   ├── api/                # API documentation
 │   └── features/           # Feature specs
 ├── src/
 │   ├── app/                # Next.js 16 App Router
-│   │   ├── (marketing)/    # Public pages (PPR enabled)
-│   │   ├── (shop)/         # Marketplace
-│   │   ├── (visualizer)/   # AI features
-│   │   ├── (vendor)/       # Vendor portal
-│   │   └── (admin)/        # Admin dashboard
+│   │   ├── (category-sidebar)/  # Public marketplace (PPR enabled)
+│   │   ├── (admin)/        # Admin dashboard (WedStay team)
+│   │   ├── (visualizer)/   # AI venue visualizer
+│   │   └── (login)/        # Authentication
 │   ├── components/
 │   │   ├── ui/             # shadcn/ui components
 │   │   ├── commerce/       # Shopping components
 │   │   ├── visualizer/     # AI components
-│   │   ├── vendor/         # Vendor components
 │   │   └── admin/          # Admin components
 │   ├── lib/
 │   │   ├── supabase/       # Supabase clients
 │   │   ├── drizzle/        # Database schema & ORM
 │   │   ├── actions/        # Server Actions
-│   │   └── api/            # External API clients
+│   │   └── api/            # External API clients (Replicate, etc)
 │   └── types/              # TypeScript types
 ├── supabase/               # Supabase config & migrations
 └── scripts/                # Build scripts
@@ -85,25 +90,26 @@ Initialize the WedStay project from NextFaster template.
 
 ---
 
-### `/create-vendor-dashboard`
-Build the vendor dashboard with product management, analytics, and inquiry handling.
+### `/create-admin-dashboard`
+Build the admin dashboard for WedStay team to manage all products, inquiries, and analytics.
 
 **Context:**
-- Vendors need to manage their products, handle inquiries, and view analytics
+- WedStay admins curate ALL products (no vendor self-service)
+- Manage product catalog with affiliate links and rental inquiry forms
+- Handle customer inquiries and route to vendors
+- Track performance analytics and commission revenue
 - Uses React Server Components for data fetching
-- Implements role-based access with Supabase Auth
-- Shows real-time metrics with recharts
 
 **Tasks:**
-1. Create vendor layout and navigation
-2. Build product CRUD with Server Actions
-3. Implement inquiry management system
-4. Add analytics dashboard with charts
-5. Create vendor settings page
+1. Create admin layout with role-based access
+2. Build product CRUD with affiliate link management
+3. Implement inquiry management and vendor routing
+4. Add analytics dashboard with revenue tracking
+5. Create vendor reference data management
 
 **Example:**
 ```
-/create-vendor-dashboard
+/create-admin-dashboard
 ```
 
 ---
@@ -131,25 +137,25 @@ Implement the AI venue visualizer using Replicate API.
 
 ---
 
-### `/create-admin-panel`
-Build the admin dashboard for vendor approval, content moderation, and analytics.
+### `/add-product-with-links`
+Add a new product with affiliate link or direct purchase URL, or mark as rental inquiry.
 
 **Context:**
-- Admins approve vendors and moderate products
-- View system-wide analytics and metrics
-- Manage inquiries and customer support
-- Configure site settings
+- WedStay admins manually curate all products
+- Products can be "purchase" (affiliate/direct link) or "rental" (inquiry form)
+- Track product type, vendor reference, and commission structure
+- Support both external checkout and lead generation
 
 **Tasks:**
-1. Create admin layout with protected routes
-2. Build vendor approval workflow
-3. Implement product moderation queue
-4. Add system analytics dashboard
-5. Create settings management
+1. Extend product schema with purchaseUrl and productType fields
+2. Create admin form for product entry with link management
+3. Add product type selector (purchase vs rental)
+4. Implement vendor reference dropdown
+5. Add commission tracking fields
 
 **Example:**
 ```
-/create-admin-panel
+/add-product-with-links
 ```
 
 ---
@@ -374,35 +380,38 @@ export const getProducts = unstable_cache(
 ## Database Schema Overview
 
 ### Core Tables
-- `profiles` - User profiles (extends auth.users)
-- `vendors` - Vendor accounts with approval workflow
-- `products` - Wedding products and services
-- `inquiries` - Quote requests from customers
-- `orders` - Completed transactions
-- `cart_items` - Shopping cart (server-side)
+- `profiles` - User profiles (extends auth.users) - admins and customers only
+- `vendors` - Vendor reference data (company names, websites, contact info) - NO LOGIN
+- `products` - Wedding products curated by WedStay admins
+- `inquiries` - Quote requests from customers for rental products
+- `cart_items` - Shopping cart / vision board (server-side)
 - `style_presets` - AI visualizer presets
 - `visualizations` - Generated AI images
 
+### Product Types
+- **Purchase Products**: Have purchaseUrl (affiliate or direct link), no inquiry form
+- **Rental Products**: Have inquiry form, routed to vendor contact
+
 ### Key Relationships
-- Vendors → Products (one-to-many)
+- Vendors → Products (one-to-many, reference only)
+- Products have purchaseUrl for external checkout OR inquiry form enabled
 - Users → Inquiries (one-to-many)
 - Products → Cart Items (one-to-many)
-- Style Presets → Visualizations (one-to-many)
 
 ---
 
 ## Authentication & Authorization
 
 ### User Roles
-- **customer**: Browse and purchase
-- **vendor**: Manage products and inquiries
-- **admin**: Full system access
+- **customer**: Browse products, create vision boards, submit inquiries
+- **admin**: WedStay team - full product management, inquiry handling, analytics
 
 ### Row Level Security
 All tables have RLS policies enforcing:
-- Customers can only see approved products
-- Vendors can only edit their own products
-- Admins have full access
+- Customers can only see approved/published products
+- Customers can only edit their own cart items and inquiries
+- Admins have full CRUD access to all tables
+- Vendors table is read-only reference data (no vendor logins)
 
 ---
 
