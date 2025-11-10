@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { deleteProduct } from '@/lib/actions/vendor';
+import { deleteProduct } from '@/lib/actions/admin';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface Product {
@@ -118,7 +118,7 @@ export function ProductsList({ products }: ProductsListProps) {
             </p>
             <div className="mt-6">
               <Link
-                href="/vendor/products/new"
+                href="/admin/products/new"
                 className="inline-flex items-center rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
               >
                 Add Product
@@ -189,7 +189,7 @@ export function ProductsList({ products }: ProductsListProps) {
                   <td className="px-6 py-4 text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       <Link
-                        href={`/vendor/products/${product.id}/edit`}
+                        href={`/admin/products/${product.id}/edit`}
                         className="text-purple-600 hover:text-purple-900"
                       >
                         <PencilIcon className="h-5 w-5" />

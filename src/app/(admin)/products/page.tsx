@@ -4,7 +4,7 @@ import { vendors, products } from '@/lib/drizzle/schema';
 import { eq } from 'drizzle-orm';
 import Link from 'next/link';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { ProductsList } from '@/components/vendor/products-list';
+import { ProductsList } from '@/components/admin/products-list';
 
 export const metadata = {
   title: 'Products | Vendor Dashboard',
@@ -44,7 +44,7 @@ export default async function VendorProductsPage() {
           </p>
         </div>
         <Link
-          href="/vendor/products/new"
+          href="/admin/products/new"
           className="inline-flex items-center rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
         >
           <PlusIcon className="-ml-1 mr-2 h-5 w-5" />

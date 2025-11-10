@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { db } from '@/lib/drizzle/db';
 import { vendors } from '@/lib/drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { VendorSettingsForm } from '@/components/vendor/settings-form';
+import { VendorSettingsForm } from '@/components/admin/settings-form';
 
 export const metadata = {
   title: 'Settings | Vendor Dashboard',

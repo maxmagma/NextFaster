@@ -63,28 +63,28 @@ export default async function VendorDashboard() {
       name: 'Total Products',
       value: productCount.toString(),
       icon: CubeIcon,
-      href: '/vendor/products',
+      href: '/admin/products',
       color: 'bg-blue-500',
     },
     {
       name: 'Pending Inquiries',
       value: pendingInquiries.toString(),
       icon: EnvelopeIcon,
-      href: '/vendor/inquiries',
+      href: '/admin/inquiries',
       color: 'bg-purple-500',
     },
     {
       name: 'Total Revenue',
       value: `$${vendor.totalRevenue || '0'}`,
       icon: CurrencyDollarIcon,
-      href: '/vendor/analytics',
+      href: '/admin/analytics',
       color: 'bg-green-500',
     },
     {
       name: 'Product Views',
       value: totalProducts.reduce((sum, p) => sum + (p.views || 0), 0).toString(),
       icon: ChartBarIcon,
-      href: '/vendor/analytics',
+      href: '/admin/analytics',
       color: 'bg-yellow-500',
     },
   ];
@@ -127,7 +127,7 @@ export default async function VendorDashboard() {
         <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           <Link
-            href="/vendor/products/new"
+            href="/admin/products/new"
             className="flex items-center rounded-lg border-2 border-dashed border-gray-300 p-4 text-center transition-colors hover:border-purple-500 hover:bg-purple-50"
           >
             <div className="w-full">
@@ -137,7 +137,7 @@ export default async function VendorDashboard() {
           </Link>
 
           <Link
-            href="/vendor/inquiries"
+            href="/admin/inquiries"
             className="flex items-center rounded-lg border-2 border-dashed border-gray-300 p-4 text-center transition-colors hover:border-purple-500 hover:bg-purple-50"
           >
             <div className="w-full">
@@ -147,7 +147,7 @@ export default async function VendorDashboard() {
           </Link>
 
           <Link
-            href="/vendor/analytics"
+            href="/admin/analytics"
             className="flex items-center rounded-lg border-2 border-dashed border-gray-300 p-4 text-center transition-colors hover:border-purple-500 hover:bg-purple-50"
           >
             <div className="w-full">
@@ -164,7 +164,7 @@ export default async function VendorDashboard() {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Recent Products</h2>
             <Link
-              href="/vendor/products"
+              href="/admin/products"
               className="text-sm text-purple-600 hover:underline"
             >
               View all
@@ -181,7 +181,7 @@ export default async function VendorDashboard() {
             </p>
             <div className="mt-6">
               <Link
-                href="/vendor/products/new"
+                href="/admin/products/new"
                 className="inline-flex items-center rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
               >
                 <CubeIcon className="-ml-1 mr-2 h-5 w-5" />
@@ -194,7 +194,7 @@ export default async function VendorDashboard() {
             {recentProducts.map((product) => (
               <Link
                 key={product.id}
-                href={`/vendor/products/${product.id}`}
+                href={`/admin/products/${product.id}`}
                 className="block px-6 py-4 transition-colors hover:bg-gray-50"
               >
                 <div className="flex items-center justify-between">

@@ -3,7 +3,7 @@ import { db } from '@/lib/drizzle/db';
 import { vendors, products } from '@/lib/drizzle/schema';
 import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
-import { ProductForm } from '@/components/vendor/product-form';
+import { ProductForm } from '@/components/admin/product-form';
 
 export const metadata = {
   title: 'Edit Product | Vendor Dashboard',
@@ -29,7 +29,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
   });
 
   if (!vendor) {
-    redirect('/vendor/dashboard');
+    redirect('/admin/dashboard');
   }
 
   // Get product
@@ -38,7 +38,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
   });
 
   if (!product || product.vendorId !== vendor.id) {
-    redirect('/vendor/products');
+    redirect('/admin/products');
   }
 
   return (

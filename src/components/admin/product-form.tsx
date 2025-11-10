@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createProduct, updateProduct } from '@/lib/actions/vendor';
+import { createProduct, updateProduct } from '@/lib/actions/admin';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -60,7 +60,7 @@ export function ProductForm({ product }: ProductFormProps) {
         : await createProduct(formData);
 
       if (result.success) {
-        router.push('/vendor/products');
+        router.push('/admin/products');
         router.refresh();
       } else {
         setError(result.error || 'Failed to save product');
@@ -224,7 +224,7 @@ export function ProductForm({ product }: ProductFormProps) {
         <Button
           type="button"
           variant="outline"
-          onClick={() => router.push('/vendor/products')}
+          onClick={() => router.push('/admin/products')}
         >
           Cancel
         </Button>
